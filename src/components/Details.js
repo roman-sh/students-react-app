@@ -6,6 +6,8 @@ import {
   TextField,
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
+import { useAtom } from 'jotai'
+import { studentsAtom, currentStudentAtom, selectedIndexAtom } from '../store.js'
 
 
 const keys = [
@@ -17,7 +19,10 @@ const keys = [
 ]
 
 
-export default ({ setStudents, currentStudent, setCurrentStudent, selectedIndex, setSelectedIndex }) => {
+export default () => {
+  const [students, setStudents] = useAtom(studentsAtom)
+  const [currentStudent, setCurrentStudent] = useAtom(currentStudentAtom)
+  const [selectedIndex, setSelectedIndex] = useAtom(selectedIndexAtom)
   const [isLoading, setIsLoading] = useState(false)
 
   const postStudent = async () => {

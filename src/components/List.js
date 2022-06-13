@@ -9,9 +9,14 @@ import {
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
+import { useAtom } from 'jotai'
+import { studentsAtom, currentStudentAtom, selectedIndexAtom } from '../store.js'
 
 
-export default ({ students, setStudents, currentStudent, setCurrentStudent, selectedIndex, setSelectedIndex }) => {
+export default () => {
+  const [students, setStudents] = useAtom(studentsAtom)
+  const [currentStudent, setCurrentStudent] = useAtom(currentStudentAtom)
+  const [selectedIndex, setSelectedIndex] = useAtom(selectedIndexAtom)
 
   useEffect(() => {
     ; (async () => {
