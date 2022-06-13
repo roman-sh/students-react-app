@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import {
   Button,
@@ -8,6 +7,7 @@ import {
 import { LoadingButton } from '@mui/lab'
 import { useAtom } from 'jotai'
 import { studentsAtom, currentStudentAtom, selectedIndexAtom } from '../store.js'
+import axios from '../axios.js'
 
 
 const keys = [
@@ -28,8 +28,8 @@ export default () => {
   const postStudent = async () => {
     setIsLoading(true)
     try {
-      await axios.post('http://localhost:3500/student', currentStudent)
-      const students = (await axios('http://localhost:3500/students')).data
+      await axios.post('/student', currentStudent)
+      const students = (await axios('/students')).data
       setStudents(students)
       if (!currentStudent._id) {
         setSelectedIndex(students.length - 1)
@@ -39,7 +39,6 @@ export default () => {
       console.log(e.message)
     }
     finally {
-      await new Promise(r => setTimeout(r, 1000))
       setIsLoading(false)
     }
   }

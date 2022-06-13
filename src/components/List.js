@@ -8,9 +8,9 @@ import {
   IconButton
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import axios from 'axios'
 import { useAtom } from 'jotai'
 import { studentsAtom, currentStudentAtom, selectedIndexAtom } from '../store.js'
+import axios from '../axios.js'
 
 
 export default () => {
@@ -21,7 +21,7 @@ export default () => {
   useEffect(() => {
     ; (async () => {
       try {
-        const students = (await axios('http://localhost:3500/students')).data
+        const students = (await axios('/students')).data
         setStudents(students)
         setCurrentStudent({ ...students[selectedIndex] })
       }
@@ -40,8 +40,8 @@ export default () => {
 
   const handleDelete = async (student) => {
     try {
-      await axios.delete(`http://localhost:3500/student/${student._id}`)
-      const students = (await axios('http://localhost:3500/students')).data
+      await axios.delete(`/student/${student._id}`)
+      const students = (await axios('/students')).data
       setStudents(students)
 
       let index = selectedIndex
